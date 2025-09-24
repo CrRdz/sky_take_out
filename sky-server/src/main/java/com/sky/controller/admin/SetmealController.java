@@ -49,4 +49,15 @@ public class SetmealController {
         return Result.success(pageResult);
     }
 
+    /**
+     * 批量删除套餐
+     * @param ids
+     * @return
+     */
+    @DeleteMapping
+    @ApiOperation("批量删除套餐")
+    public Result delete(@RequestParam List<Long> ids){
+        setmealService.deleteBatch(ids);
+        return Result.success();
+    }
 }

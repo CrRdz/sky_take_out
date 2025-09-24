@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.sky.dto.SetmealPageQueryDTO;
 import com.sky.entity.Setmeal;
 import com.sky.vo.SetmealVO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -31,4 +32,18 @@ public interface SetmealMapper {
      */
     Page<SetmealVO> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
 
+    /**
+     * 根据id查询套餐
+     * @param setmealId
+     * @return
+     */
+    @Select("select * from setmeal where id = #{setmealId}")
+    Setmeal getById(Long setmealId);
+
+    /**
+     * 根据id删除套餐
+     * @param setmealId
+     */
+    @Delete("delete from setmeal where id = #{setmealId}")
+    void deleteById(Long setmealId);
 }

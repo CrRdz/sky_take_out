@@ -21,4 +21,9 @@ public interface SetmealService {
      */
     PageResult pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
 
+    /**
+     * 套餐批量删除
+     * @param ids
+     */
+    void deleteBatch(List<Long> ids);
 }

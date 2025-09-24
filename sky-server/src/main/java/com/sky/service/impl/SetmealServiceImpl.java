@@ -74,4 +74,21 @@ public class SetmealServiceImpl implements SetmealService {
         return new PageResult(page.getTotal(), page.getResult());
     }
 
+    @Override
+    public void deleteBatch(List<Long> ids) {
+        ids.forEach(setmealId -> {
+            Setmeal setmeal = setmealMapper.getById(setmealId);
+            if (StatusConstant.ENABLE == setmeal.getStatus()) {
+                //起售中的套餐不可以删除
+                throw new RuntimeException(MessageConstant.SETMEAL_ON_SALE);
+            }
+        });
+
+        ids.forEach(setmealId -> {
+            //删除套餐表中的数据
+            setmealMapper.deleteById(setmealId);
+            //删除套餐和菜品的关联关系
+            setmealDishMapper.deleteBySetmealId(setmealId);
+        });
+    }
 }
