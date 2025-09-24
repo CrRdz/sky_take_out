@@ -77,4 +77,15 @@ public class DishController {
         DishVO dishVO = dishService.getByIdWithFlavor(id);
         return Result.success(dishVO);
     }
+
+    /**
+     * 修改菜品，同时修改对应的口味数据
+     * @param dishDTO
+     */
+    @PutMapping
+    @ApiOperation("修改菜品")
+    public Result update(@RequestBody DishDTO dishDTO){
+        dishService.updateWithFlavor(dishDTO);
+        return Result.success();
+    }
 }
